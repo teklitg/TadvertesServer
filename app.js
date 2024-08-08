@@ -8,6 +8,10 @@ app.use(cors()); // Corrected: cors() is a function that needs to be called
 app.use(express.json());
 app.use("/api", userRoute);
 app.use("/api", productRouter)
+app.get("/" , (req, res) => {
+
+    res.json({"home" : "wellcome"})
+})
 
 
 module.exports = app;
