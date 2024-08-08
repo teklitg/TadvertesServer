@@ -3,19 +3,22 @@ const bcrypt = require("bcrypt");
 
 const userSchema = new mongoose.Schema({
   name: { type: String, required: false },
-  campanyName: { type: String, required: false },
+  companyName: { type: String, required: false },
   fathersName: { type: String, required: false },
   email: { type: String, required: true, unique: true },
   phone: { type: String, required: false },
   password: { type: String, required: true },
   authToken: { type: String },
   isAuthenticated: { type: Boolean, default: false },
+  resetPasswordToken: { type: String },
+  resetPasswordTokenExpiry: { type: Date },
+  products: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }] // Add this line
 }, {
   validate: {
     validator: function() {
-      return this.name || this.campanyName;
+      return this.name || this.companyName;
     },
-    message: 'Either name or campanyName must be provided'
+    message: 'Either name or companyName must be provided'
   }
 });
 
